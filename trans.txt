@@ -1,9 +1,7 @@
-Withdrawn 56 by Mobile Banking
-Withdrawn 67 by ATM
-Withdrawn 123 by Mobile Banking 01672836364
-Withdrawn 456 by ATM 
-Withdrawn 90 by ATM . Balance: 910.00
-Deposit Amount: 900. Balance: 1810.00
-Withdrawn 400 by Mobile Banking 01712101722. Balance: 1410.00
-Password Reset Successfull
-Withdrawn 123 by ATM . Balance: 1077.00
+Withdrawn BDT 90 by ATM . Balance: 487.00. Time: Sun Aug 29 17:21:29 UTC 2021
+Password Reset Successfull. Time: Sun Aug 29 17:21:36 UTC 2021
+Withdrawn BDT 100 by Mobile Banking 01672836364. Balance: 387.00. Time: Sun Aug 29 17:23:46 UTC 2021
+Deposit Amount: 400. Balance: 787.00. Time: Sun Aug 29 17:23:57 UTC 2021
+Password Reset Successfull. Time: Sun Aug 29 17:24:21 UTC 2021
+Deposit Amount: 1000. Balance: 1787.00. Time: Sun Aug 29 17:26:17 UTC 2021
+Password Reset Successfull. Time: Sun Aug 29 17:26:30 UTC 2021

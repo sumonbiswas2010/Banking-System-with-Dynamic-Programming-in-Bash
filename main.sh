@@ -5,6 +5,7 @@ account='181002087'
 password=''
 balance=0.00;
 agents=()
+
 while IFS= read -r line; 
 do
   agents+=($line)
@@ -58,19 +59,26 @@ Mobile_Withdraw()
 Withdraw()
 {
   method=$1
-  read -p "Enter Withdraw Amount: " a
-  a=$(  Number $a )
-  if(($a==0))
-  then echo Please Enter a Valid Amount
-  else
-    if (( $(echo "$balance > $a" |bc -l) )); then
-    #then
-      balance=`echo $balance-$a | bc`
-      echo "Withdrawn $a by $method $2. Balance: $balance" >> trans.txt
-      echo "$balance" >> balance.txt
-      echo Your Current Balance is $balance;
-    else echo Insufficient Balance. Please try again.
+  Check_Pass
+  ok=$?
+  if(($ok==1))
+  then
+    read -p "Enter Withdraw Amount: " a
+    a=$(  Number $a )
+    if(($a==0))
+    then echo Please Enter a Valid Amount
+    else
+      if (( $(echo "$balance > $a" |bc -l) )); then
+      #then
+        balance=`echo $balance-$a | bc`
+        echo "Withdrawn BDT $a by $method $2. Balance: $balance. Time: $(date)" >> trans.txt
+        > balance.txt
+        echo "$balance" >> balance.txt
+        echo Your Current Balance is $balance;
+      else echo Insufficient Balance. Please try again.
+      fi
     fi
+  else echo Wrong Password. Please Try Again.
   fi
 }
 
@@ -107,7 +115,9 @@ do
       then echo Please Enter a Valid Amount
       else
         balance=`echo $balance+$a | bc`
-        echo "Deposit Amount: $a. Balance: $balance" >> trans.txt
+        echo "Deposit Amount: $a. Balance: $balance. Time: $(date)" >> trans.txt
+        > balance.txt
+        echo "$balance" >> balance.txt
         echo Your Current Balance is $balance;
       fi
     ;;
@@ -122,6 +132,7 @@ do
       elif(($x==2))
       then 
         Withdraw "ATM"
+      else echo Invalid Method Selection!
       fi
     ;;
 
@@ -135,7 +146,9 @@ do
         if [[ "$new" == "$confirm" ]]
         then 
           password=$new
-          echo "Password Reset Successfull" >> trans.txt
+          echo "Password Reset Successfull. Time: $(date)" >> trans.txt
+          > password.txt
+          echo "$new" >> password.txt
           echo Password Reset Successfull
         else echo New Password and Confirm Password Mismatched
         fi
