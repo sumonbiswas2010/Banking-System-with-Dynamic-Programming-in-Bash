@@ -1,5 +1,24 @@
 #install-pkg bc
-agents=(01672836364 01935640880)
+#echo "insert text here" > new.txt
+name="Sumon Biswas"
+account='181002087'
+password=''
+balance=0.00;
+agents=()
+while IFS= read -r line; 
+do
+  agents+=($line)
+done < agents.txt
+
+for word in $(<balance.txt)
+do
+    balance=$word
+done
+
+for word in $(<password.txt)
+do
+    password=$word
+done
 
 Check_Pass()
 {
@@ -29,7 +48,7 @@ Mobile_Withdraw()
  do
   if [[ "$x" == "$i" ]]
   then 
-    Withdraw
+    Withdraw "Mobile Banking" $x
     return;
   fi
  done
@@ -38,6 +57,7 @@ Mobile_Withdraw()
 
 Withdraw()
 {
+  method=$1
   read -p "Enter Withdraw Amount: " a
   a=$(  Number $a )
   if(($a==0))
@@ -46,18 +66,17 @@ Withdraw()
     if (( $(echo "$balance > $a" |bc -l) )); then
     #then
       balance=`echo $balance-$a | bc`
+      echo "Withdrawn $a by $method $2. Balance: $balance" >> trans.txt
+      echo "$balance" >> balance.txt
       echo Your Current Balance is $balance;
     else echo Insufficient Balance. Please try again.
     fi
   fi
 }
-name="Sumon Biswas"
-account='181002087'
-password='secret'
-balance=1000.00;
+
+
 echo Hi $name, Good Day
 echo
-
 
 switch=1;
 
@@ -88,6 +107,7 @@ do
       then echo Please Enter a Valid Amount
       else
         balance=`echo $balance+$a | bc`
+        echo "Deposit Amount: $a. Balance: $balance" >> trans.txt
         echo Your Current Balance is $balance;
       fi
     ;;
@@ -101,7 +121,7 @@ do
         Mobile_Withdraw $mobile
       elif(($x==2))
       then 
-        Withdraw
+        Withdraw "ATM"
       fi
     ;;
 
@@ -115,6 +135,7 @@ do
         if [[ "$new" == "$confirm" ]]
         then 
           password=$new
+          echo "Password Reset Successfull" >> trans.txt
           echo Password Reset Successfull
         else echo New Password and Confirm Password Mismatched
         fi

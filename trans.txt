@@ -1,0 +1,9 @@
+Withdrawn 56 by Mobile Banking
+Withdrawn 67 by ATM
+Withdrawn 123 by Mobile Banking 01672836364
+Withdrawn 456 by ATM 
+Withdrawn 90 by ATM . Balance: 910.00
+Deposit Amount: 900. Balance: 1810.00
+Withdrawn 400 by Mobile Banking 01712101722. Balance: 1410.00
+Password Reset Successfull
+Withdrawn 123 by ATM . Balance: 1077.00
