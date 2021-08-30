@@ -5,3 +5,15 @@ Deposit Amount: 400. Balance: 787.00. Time: Sun Aug 29 17:23:57 UTC 2021
 Password Reset Successfull. Time: Sun Aug 29 17:24:21 UTC 2021
 Deposit Amount: 1000. Balance: 1787.00. Time: Sun Aug 29 17:26:17 UTC 2021
 Password Reset Successfull. Time: Sun Aug 29 17:26:30 UTC 2021
+Withdrawn BDT 45 by ATM . Balance: 1742.00. Time: Mon Aug 30 17:26:43 UTC 2021
+Withdrawn BDT 45 by ATM . Balance: 1697.00. Time: Mon Aug 30 17:28:29 UTC 2021
+Withdrawn BDT 700 by ATM . Balance: 997.00. Time: Mon Aug 30 17:29:33 UTC 2021
+Withdrawn BDT 700 by ATM . Balance: 297.00. Time: Mon Aug 30 17:31:09 UTC 2021
+Deposit Amount: 10000. Balance: 10297.00. Time: Mon Aug 30 17:32:03 UTC 2021
+Deposit Amount: 100000. Balance: 110297.00. Time: Mon Aug 30 17:32:09 UTC 2021
+Withdrawn BDT 2500 by ATM . Balance: 107797.00. Time: Mon Aug 30 18:15:12 UTC 2021
+Password Reset Successfull. Time: Mon Aug 30 18:17:22 UTC 2021
+Withdrawn BDT 51000 by Mobile Banking 01712101722. Balance: 56797.00. Time: Mon Aug 30 18:57:45 UTC 2021
+Withdrawn BDT 12000 by ATM . Balance: 44797.00. Time: Mon Aug 30 18:58:40 UTC 2021
+Withdrawn BDT 700 by ATM . Balance: 44097.00. Time: Mon Aug 30 18:59:36 UTC 2021
+Withdrawn BDT 41100 by ATM . Balance: 2997.00. Time: Mon Aug 30 19:00:14 UTC 2021
