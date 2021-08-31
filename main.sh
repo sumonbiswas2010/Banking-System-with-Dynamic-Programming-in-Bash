@@ -1,5 +1,4 @@
 #install-pkg bc
-#echo "insert text here" > new.txt
 name="Sumon Biswas"
 account='181002087'
 bank='Operating System Bank LTD.'
@@ -8,6 +7,7 @@ password=''
 balance=0.00;
 agents=()
 coin=()
+
 for word in $(<notes.txt)
 do
   coin+=($word)
@@ -30,11 +30,11 @@ done
 Dynamic()
 {
   w=$1
-  w=$((w/100))
-  ww=$(($w%${coin[0]}))
+  ww=$(($w%$((${coin[0]}*100))))
   if((ww!=0))
   then return
   fi
+  w=$((w/100))
   coin_count=()
   res=()
   declare -A mat
@@ -84,9 +84,7 @@ Dynamic()
           n2=${mat[$i,$index]}
           n2=$((n2+1))
           Min $n1 $n2
-          #echo $? w
           mat[$i,$j]=$?
-          #echo ${mat[$i,$j]} mat
         fi
       done
     fi
@@ -104,13 +102,16 @@ Dynamic()
       j=$((j-c))
     done
   done
-  w=$((w*100))
-  echo Minimum Notes Required: $coins to fill $w
+  amount=$((w*100))
+  echo Minimum Notes Required: $coins to fill $amount BDT
   
   for((i=0;i<n;i++))
   do
-    coin[$i]=$((${coin[$i]}*100))
-    echo Note: ${coin[$i]} Count:${coin_count[$i]}
+    if((${coin_count[$i]}==0))
+    then continue
+    fi
+    note=$((${coin[$i]}*100))
+    echo Note: $note Count: ${coin_count[$i]}
   done
   # for i in "${res[@]}"
   # do
@@ -166,16 +167,16 @@ Number()
 
 Mobile_Withdraw()
 {
- x=$1
- for i in "${agents[@]}"
- do
-  if [[ "$x" == "$i" ]]
-  then 
-    Withdraw "Mobile Banking" $x
-    return;
-  fi
- done
- echo No Agents Found
+  x=$1
+  for i in "${agents[@]}"
+  do
+    if [[ "$x" == "$i" ]]
+    then 
+      Withdraw "Mobile Banking" $x
+      return;
+    fi
+  done
+  echo No Agents Found
 }
 
 Withdraw()
@@ -193,9 +194,9 @@ Withdraw()
       then
         echo Please Enter a multiply of $((${coin[0]}*100))
         continue
-      elif(($a>250000))
+      elif(($a>50000))
       then
-        echo Withdraw Amount Cannot Exceed 250000
+        echo Withdraw Amount Cannot Exceed 50000
         continue
       fi
       if(($a==0))
@@ -220,6 +221,7 @@ Withdraw()
       continue
     fi
   done
+  echo
 }
 
 Account()
@@ -240,15 +242,91 @@ Account()
       continue
     fi
   done
+  echo
 }
 
+Transfer()
+{
+  while((1))
+  do
+    Check_Pass
+    if(($?==1))
+    then
+      read -p "Enter Destination Bank Account Number: " acc 
+      if((${#acc}!=9))
+      then
+        echo Account Number is Invalid. Please Try Again.
+        continue
+      else
+        read -p "Enter Amount: " a
+        a=$(  Number $a )
+        if(($(echo "$balance > $a" |bc -l)))
+        then
+          balance=`echo $balance-$a | bc`
+          echo "Transfer BDT $a to $acc . Balance: $balance. Time: $(date)" >> trans.txt
+          > balance.txt
+          echo "$balance" >> balance.txt
+          echo Transfer BDT $a to $acc Successfull. Balance: $balance.
+          break
+        else
+          echo Insufficient Balance
+          continue
+        fi
+      fi
+    else 
+      echo Wrong Password. Please Try Again.
+      continue
+    fi
+  done
+  echo
+}
+
+Recharge()
+{
+  while((1))
+  do
+    Check_Pass
+    if(($?==1))
+    then
+      read -p "Enter Mobile Number: " mob
+      if((${#mob}!=11 || ${mob:0:2}!=01))
+      then
+        echo Mobile Number is Invalid. Please Try Again.
+        continue
+      else
+        read -p "Enter Amount: " a
+        a=$(  Number $a )
+        if(($(echo "10 > $a" |bc -l)))
+        then
+          echo Amount cannot be less than 10!
+          continue
+        fi
+        if(($(echo "$balance > $a" |bc -l)))
+        then
+          balance=`echo $balance-$a | bc`
+          echo "Mobile Recharge BDT $a to $mob . Balance: $balance. Time: $(date)" >> trans.txt
+          > balance.txt
+          echo "$balance" >> balance.txt
+          echo Mobile Recharge BDT $a to $mob Successfull. Balance: $balance.
+          break
+        else
+          echo Insufficient Balance
+          continue
+        fi
+      fi
+    else 
+      echo Wrong Password. Please Try Again.
+      continue
+    fi
+  done
+  echo
+}
 
 echo Hi $name, Good Day
 echo
 
-switch=1;
-echo 1. Echo 1
-echo 2. Echo 2
+echo 1. Recharge
+echo 2. Transfer Money to Bank Acc.
 echo 3. Check Balance
 echo 4. Deposit Amount
 echo 5. Withdraw
@@ -257,17 +335,20 @@ echo 7. My Account
 echo 8. Change Password
 echo 9. Display Menu Again
 echo 0. Exit
+echo
 
 while((1))
 do
   read -p "Enter a key: " switch
   case $switch in
     1)
-      echo 1
-      ;;
-    2)
-      echo 2
+      Recharge
     ;;
+
+    2)
+      Transfer
+    ;;
+
     3)
       while((1))
       do
@@ -282,11 +363,11 @@ do
           continue
         fi
       done
+      echo
     ;;
+
     4)
       read -p "Enter Deposit Amount: " a
-      #Number a 
-      #a=$?
       a=$(  Number $a )
       if(($a==0))
       then echo Please Enter a Valid Amount
@@ -295,9 +376,11 @@ do
         echo "Deposit Amount: $a. Balance: $balance. Time: $(date)" >> trans.txt
         > balance.txt
         echo "$balance" >> balance.txt
-        echo Your Current Balance is $balance;
+        echo Deposit Successfull. Current Balance: $balance;
       fi
+      echo
     ;;
+
     5)
       echo 1. Mobile Banking
       echo 2. ATM 
@@ -312,9 +395,11 @@ do
       else echo Invalid Method Selection!
       fi
     ;;
+
     6)
       Statement
     ;;
+
     7)
       Account
     ;;
@@ -348,8 +433,8 @@ do
     ;;
 
     9)
-      echo 1. Echo 1
-      echo 2. Echo 2
+      echo 1. Recharge
+      echo 2. Transfer Money to Bank Acc.
       echo 3. Check Balance
       echo 4. Deposit Amount
       echo 5. Withdraw
@@ -358,15 +443,18 @@ do
       echo 8. Change Password
       echo 9. Display Menu Again
       echo 0. Exit
+      echo
     ;;
       
     0)
       break;
     ;;
+
     *)
-      echo Wrong Input
+      echo Wrong Input. Give a number between 0 to 9.
     ;;
+
   esac
 done
 echo
-echo Thank You For Using Me
+echo Thank You For Using Me. Spread Happiness.
