@@ -458,3 +458,4 @@ do
 done
 echo
 echo Thank You For Using Me. Spread Happiness.
+exit
