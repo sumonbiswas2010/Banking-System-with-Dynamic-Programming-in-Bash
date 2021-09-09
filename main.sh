@@ -387,7 +387,7 @@ do
       read -p "Enter Withdraw Method: " x
       if(($x==1))
       then
-        read -p "Please enter the mobile number: " mobile;
+        read -p "Enter the Agent Mobile Number: " mobile;
         Mobile_Withdraw $mobile
       elif(($x==2))
       then 

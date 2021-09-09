@@ -1,3 +1,6 @@
-Mobile Recharge BDT 20 to 01672836364 . Balance: 4680. Time: Wed Sep  8 16:14:52 UTC 2021
-Transfer BDT 200 to 181002087 . Balance: 4480. Time: Wed Sep  8 16:15:12 UTC 2021
-Deposit Amount: 1000. Balance: 5480. Time: Wed Sep  8 16:17:33 UTC 2021
+Mobile Recharge BDT 120 to 01672836364 . Balance: 5360. Time: Thu Sep  9 15:13:47 UTC 2021
+Transfer BDT 1000 to 181002087 . Balance: 4360. Time: Thu Sep  9 15:14:27 UTC 2021
+Deposit Amount: 30000. Balance: 34360. Time: Thu Sep  9 15:15:20 UTC 2021
+Withdrawn BDT 10700 by Mobile Banking 01672836364. Balance: 23660. Time: Thu Sep  9 15:17:11 UTC 2021
+Withdrawn BDT 8400 by ATM . Balance: 15260. Time: Thu Sep  9 15:17:41 UTC 2021
+Password Reset Successfull. Time: Thu Sep  9 15:19:02 UTC 2021
